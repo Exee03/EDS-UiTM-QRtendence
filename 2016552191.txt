@@ -1,4 +1,12 @@
 Date:	14/1/2019
+Time:	5.30pm
+
+1. Explore about Ionic App Developer.
+2. Setup the Ionic and its dependencies.
+3. Follow the tutorial given by SV.
+
+
+Date:	14/1/2019
 Time:	1:00pm
 
 1. Briefing by Pn.Azura about project.
