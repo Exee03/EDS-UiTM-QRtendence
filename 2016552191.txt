@@ -1,9 +1,18 @@
 Date:	15/1/2019
+Time:	5.30pm
+
+1. Cannot run the app in android device or emulator.
+2. Study QRCode on YouTube.
+3. Try to solve android platform for the app.
+
+
+Date:	15/1/2019
 Time:	1:00pm
 
 1. Manage to adding new page in blank page.
 2. Try to import component to the blank page which is FABs, Card, Menu and CheckBox.
 3. In progress to adding tab in page.
+
 
 Date:	14/1/2019
 Time:	5.30pm
