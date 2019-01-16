@@ -1,3 +1,11 @@
+Date:	16/1/2019
+Time:	1.00pm
+
+1. QRCode and Barcode function finally can run on the Android by using DevApp.
+2. Try to export the Ionic Framework to APK file but there are some error which is related to the JDK version.
+3. Try to solve the problem of JDK version where Android SDK manager depend on it.
+
+
 Date:	15/1/2019
 Time:	5.30pm
 
