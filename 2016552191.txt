@@ -1,4 +1,13 @@
 Date:	16/1/2019
+Time:	1.00pm
+
+1. Solve the JDK version problems and finally able to create APK file and test or run it to actual android phone.
+2. Able to simulate the App on android emulator using Android Studio.
+3. Add the custom icon and splash screen to the APK.
+4. Learning how to do page data passing.
+
+
+Date:	16/1/2019
 Time:	5.30pm
 
 1. Learn to switch push, pull and switch the page.
