@@ -1,4 +1,11 @@
-Date:	16/1/2019
+Date:	17/1/2019
+Time:	5.30pm
+
+1. Able to do and understand the page data passing.
+2. Trying to implement data passing to the QRCode App for student identification.
+
+
+Date:	17/1/2019
 Time:	1.00pm
 
 1. Solve the JDK version problems and finally able to create APK file and test or run it to actual android phone.
