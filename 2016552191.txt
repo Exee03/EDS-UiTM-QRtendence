@@ -1,3 +1,9 @@
+Date:	18/1/2019
+Time:	12.37pm
+
+1. Solve the missing module during develop the QR Code App.
+2. In progress to develop the QRCode App for student identification.
+
 Date:	17/1/2019
 Time:	5.30pm
 
