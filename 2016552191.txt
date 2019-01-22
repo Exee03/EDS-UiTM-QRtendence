@@ -1,4 +1,11 @@
 Date:	22/1/2019
+Time:	5.30pm
+
+1. There are error in other dependency during installing firebase's dependency.
+2. Try to solve the dependency problem.
+
+
+Date:	22/1/2019
 Time:	1.00pm
 
 1. Explorer about the database in Ionic.
