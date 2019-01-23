@@ -1,4 +1,13 @@
 Date:	23/1/2019
+Time:	5.30pm
+
+1. Able to manipulate database of Firebase which is add, edit and delete.
+2. Able to implement database manipulation into the QR Code App.
+3. Try to design QR Code App.
+
+
+
+Date:	23/1/2019
 Time:	1.00pm
 
 1. The problem of dependency already solved by reset the OS.
