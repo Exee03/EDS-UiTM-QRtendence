@@ -1,3 +1,11 @@
+Date:	23/1/2019
+Time:	1.00pm
+
+1. The problem of dependency already solved by reset the OS.
+2. Learn how to manipulate database using Firebase's database.
+3. Try to implement the database manipulation into the QR Code App.
+
+
 Date:	22/1/2019
 Time:	5.30pm
 
