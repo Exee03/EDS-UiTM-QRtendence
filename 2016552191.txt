@@ -1,3 +1,10 @@
+Date:	24/1/2019
+Time:	1.00pm
+
+1. Explorer about authentication for Android and iOS.
+2. Try to learn Firebase Facebook Authentication for Ionic Framework.
+
+
 Date:	23/1/2019
 Time:	5.30pm
 
