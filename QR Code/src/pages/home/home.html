@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Welcome to QRCode!</h2>
+  <p>
+    This starter project comes with simple tabs-based layout for apps
+    that are going to primarily use a Tabbed UI.
+  </p>
+  <p>
+    Take a look at the <code>src/pages/</code> directory to add or change tabs,
+    update any existing page or create new pages.
+  </p>
+  <ion-item>
+    <ion-input type="text" placeholder="My QR data" [(ngModel)]="qrData"></ion-input>
+  </ion-item>
+  <button ion-button full icon-left (click)="createCode()"><ion-icon name="barcode"></ion-icon>Create Code</button>
+  <button ion-button full icon-left (click)="scanCode()"><ion-icon name="qr-scanner"></ion-icon>Scan Code</button>
+
+  <ion-card *ngIf="createdCode">
+    <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+    <ion-card-content>
+      <p>Value: {{ createdCode }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="scanedCode">
+      <ion-card-content>
+        Result from Scan: {{ scanedCode }}
+      </ion-card-content>
+  </ion-card>
+</ion-content>
