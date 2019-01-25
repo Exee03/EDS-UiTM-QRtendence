@@ -1,4 +1,10 @@
 Date:	25/1/2019
+Time:	5.30pm
+
+1. Searching the solution for login with different Facebook account after the users is logout from the App.
+
+
+Date:	25/1/2019
 Time:	12.30pm
 
 1. Able to create app that authenticate with Facebook native plugin for Android of Ionic Framework which can be monitoring by Firebase.
