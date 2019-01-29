@@ -1,3 +1,9 @@
+Date:	28/1/2019
+Time:	5.30pm
+
+1. Try to learn Native Storage where iOS stored data from LocalStorage can be removed by the OS, when running out of memory.
+
+
 Date:	29/1/2019
 Time:	1.00pm
 
