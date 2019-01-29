@@ -1,3 +1,11 @@
+Date:	29/1/2019
+Time:	1.00pm
+
+1. Solve the problem where the Google login not run properly in native method.
+2. The profile picture from Facebook where cannot be display in App have been solved.
+3. Try to design the Attendance App which have been given by supervisor.
+
+
 Date:	28/1/2019
 Time:	5.30pm
 
