@@ -1,4 +1,11 @@
-Date:	28/1/2019
+Date:	30/1/2019
+Time:	1.00pm
+
+1. Able to store and retrive the data by using Native Storage.
+2. Try to list of the data from Native Storage and make it as slide list for furture learning.
+
+
+Date:	29/1/2019
 Time:	5.30pm
 
 1. Try to learn Native Storage where iOS stored data from LocalStorage can be removed by the OS, when running out of memory.
