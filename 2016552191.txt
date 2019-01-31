@@ -1,3 +1,11 @@
+Date:	31/1/2019
+Time:	1.00pm
+
+1. The problem of array cannot be done where the array data cannot be copy to another array variable.
+2. Proceed to the project by implement tabs and side menu into the Apps.
+
+
+
 Date:	30/1/2019
 Time:	5.30pm
 
