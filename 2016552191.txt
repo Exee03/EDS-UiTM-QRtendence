@@ -1,4 +1,10 @@
 Date:	1/2/2019
+Time:	5.30pm
+
+1. Doing the research about database structure for attendance App.
+
+
+Date:	1/2/2019
 Time:	12.30pm
 
 1. Able to place the user info into the side menu of the App.
