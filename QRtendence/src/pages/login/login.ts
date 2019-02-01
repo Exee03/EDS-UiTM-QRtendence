@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -32,7 +31,7 @@ export class LoginPage {
   tryFacebookLogin(){
     this.authService.doFacebookLogin()
     .then((res) => {
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.setRoot('MenuPage');
     }, (err) => {
       this.errorMessage = err.message;
     });
@@ -41,7 +40,7 @@ export class LoginPage {
   tryGoogleLogin(){
     this.authService.doGoogleLogin()
     .then((res) => {
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.setRoot('MenuPage');
     }, (err) => {
       this.errorMessage = err.message;
     });

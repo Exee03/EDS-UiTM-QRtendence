@@ -90,4 +90,5 @@
         <variable name="APP_NAME" value="QRtendence" />
     </plugin>
     <plugin name="cordova-plugin-nativestorage" spec="2.3.2" />
+    <engine name="android" spec="7.1.4" />
 </widget>

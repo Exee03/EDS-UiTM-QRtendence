@@ -12,6 +12,8 @@ import { NativeStorage } from '@ionic-native/native-storage'
 @Injectable()
 export class AuthServiceProvider {
 
+  user: any;
+
   constructor(
     public afAuth: AngularFireAuth,
     public facebook: Facebook,
@@ -31,6 +33,8 @@ export class AuthServiceProvider {
           const googleCredential = firebase.auth.GoogleAuthProvider.credential(response.idToken);
           firebase.auth().signInWithCredential(googleCredential)
           .then((user) => {
+            console.log(user);
+            this.nativeStorage.setItem('user',{provider: user.providerData[0].providerId,name: user.displayName,email: user.email,picture: user.photoURL}).then(() => console.log('Login with Google!'))
             resolve();
           });
         },(err) => {
@@ -57,7 +61,11 @@ export class AuthServiceProvider {
         .then((response) => {
           const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
           firebase.auth().signInWithCredential(facebookCredential)
-            .then(user => resolve());
+            .then(user => {
+              var bigImgUrl = "https://graph.facebook.com/" + user.providerData[0].uid + "/picture?height=500";
+              this.nativeStorage.setItem('user',{provider: user.providerData[0].providerId,name: user.displayName,email: user.email,picture: bigImgUrl}).then(() => console.log('Login with Facebook!'))
+              resolve()
+            });
         }, err => reject(err)
         );
       }

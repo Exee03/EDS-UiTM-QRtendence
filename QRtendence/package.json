@@ -28,9 +28,16 @@
     "@ionic-native/status-bar": "~4.18.0",
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.0.0-rc.6",
+    "cordova-android": "7.1.4",
+    "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-facebook4": "4.1.0",
     "cordova-plugin-googleplus": "7.0.0",
+    "cordova-plugin-ionic-keyboard": "^2.1.3",
+    "cordova-plugin-ionic-webview": "^2.3.2",
     "cordova-plugin-nativestorage": "2.3.2",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-whitelist": "^1.3.3",
     "firebase": "^4.12.1",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
@@ -40,6 +47,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.1",
+    "@ionic/lab": "1.0.19",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
@@ -52,7 +60,18 @@
         "APP_ID": "233583054231812",
         "APP_NAME": "QRtendence"
       },
-      "cordova-plugin-nativestorage": {}
-    }
+      "cordova-plugin-nativestorage": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }

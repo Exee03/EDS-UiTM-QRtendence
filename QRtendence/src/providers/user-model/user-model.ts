@@ -8,4 +8,5 @@ export class FirebaseUserModel {
     this.name = "";
     this.provider = "";
   }
+  
 }

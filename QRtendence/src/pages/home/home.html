@@ -1,6 +1,13 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+      <ion-buttons >
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+            <ion-row justify-content-center><ion-title>Home</ion-title></ion-row>
+            
+          </button>
+      </ion-buttons>
+      
   </ion-navbar>
 </ion-header>
 
@@ -14,4 +21,25 @@
     Take a look at the <code>src/pages/</code> directory to add or change tabs,
     update any existing page or create new pages.
   </p>
+
+    <button ion-button (click)="save()">Save</button>
+
+  <button ion-button (click)="get()">Get</button>
+  <button ion-button (click)="key()">key</button>
+  <button ion-button (click)="usersName()">name</button>
+  <button ion-button (click)="usersEmail()">email</button>
+  <button ion-button (click)="usersPic()">pic</button>
+  <button ion-button (click)="logout()">logout</button>
+
+  <ion-card *ngIf='userReady'>
+    <ion-card-content>
+      <ion-item>
+        <ion-avatar class="avatars">
+          <img src="{{user.picture}}">
+        </ion-avatar>
+      </ion-item>
+      <ion-card-title style="text-align:center">{{user.name}}</ion-card-title>
+      <p style="text-align:center">{{user.email}}</p>
+  </ion-card-content>
+</ion-card>
 </ion-content>

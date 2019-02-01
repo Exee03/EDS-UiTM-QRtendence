@@ -1,0 +1,20 @@
+<ion-menu [content]="content">
+
+  <ion-content *ngIf='userReady'>
+    <ion-item padding class="getstart">
+      <ion-avatar class="item-avatar">
+        <img src="{{user.picture}}">
+      </ion-avatar>
+      <h2>{{user.name}}</h2>
+      <h3>{{user.email}}</h3>
+    </ion-item>
+    <ion-footer no-shadow>
+        <ion-toolbar position="bottom">
+          <button ion-button block type="submit" (click)="logout()">Logout</button>
+        </ion-toolbar>
+      </ion-footer>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
