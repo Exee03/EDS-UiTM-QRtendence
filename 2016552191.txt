@@ -1,3 +1,10 @@
+Date:	7/2/2019
+Time:	1.00pm
+
+1. Explore Firebase's Cloud Function which useful for organize database in Cloud Firestore.
+2. Get instruction from SV to explore new framework which is Flutter by Google and compare it with Ionic Framework for QRtendance App.
+
+
 Date:	1/2/2019
 Time:	5.30pm
 
