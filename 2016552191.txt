@@ -1,4 +1,10 @@
 Date:	7/2/2019
+Time:	5.30pm
+
+1. Follow the tutorial in Youtube (https://www.youtube.com/watch?v=GLSG_Wh_YWc) for learn Flutter Framework.
+
+
+Date:	7/2/2019
 Time:	1.00pm
 
 1. Explore Firebase's Cloud Function which useful for organize database in Cloud Firestore.
