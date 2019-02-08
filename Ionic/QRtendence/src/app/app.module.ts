@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { DatePipe } from '@angular/common'
 
 import { MyApp } from './app.component';
 
@@ -37,6 +38,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatePipe,
     AuthServiceProvider,
     UserServiceProvider,
     NativeStorage,

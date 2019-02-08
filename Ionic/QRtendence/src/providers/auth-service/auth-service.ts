@@ -33,7 +33,6 @@ export class AuthServiceProvider {
           const googleCredential = firebase.auth.GoogleAuthProvider.credential(response.idToken);
           firebase.auth().signInWithCredential(googleCredential)
           .then((user) => {
-            console.log(user);
             this.nativeStorage.setItem('user',{provider: user.providerData[0].providerId,name: user.displayName,email: user.email,picture: user.photoURL}).then(() => console.log('Login with Google!'))
             resolve();
           });
