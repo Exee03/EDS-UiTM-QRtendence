@@ -1,3 +1,11 @@
+Date:	8/2/2019
+Time:	12.30pm
+
+1. Done follow the previous tutorial which learn about the basic structure of Flutter and Dart Framework.
+2. Try to follow the QR Code tutorial in the Youtube where the Apps can scan the QR code and Barcode image with exception if the users denied the permission to use the camera.
+
+
+
 Date:	7/2/2019
 Time:	5.30pm
 
