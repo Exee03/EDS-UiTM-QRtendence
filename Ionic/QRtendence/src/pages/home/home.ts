@@ -53,6 +53,8 @@ export class HomePage {
     
       console.log("get name")
       console.log(this.user.name)
+      console.log("get provider")
+      console.log(this.user.provider)
       
       this.userReady = true;
       
