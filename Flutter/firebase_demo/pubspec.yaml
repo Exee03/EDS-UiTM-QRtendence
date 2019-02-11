@@ -24,6 +24,11 @@ dependencies:
   firebase_auth: 0.6.6
   google_sign_in: ^3.2.4
   flutter_facebook_login: ^1.2.0
+  
+  flutter_staggered_grid_view:
+  firebase_admob: ^0.5.2
+  mlkit:
+  camera:
 
   rxdart: 0.20.0
   
