@@ -1,3 +1,19 @@
+Date:	11/2/2019
+Time:	5.30pm
+
+1. There are some error of package for image picker in Flutter during run MLKit App from tutorial.
+2. Find the way to solve image picker package in Flutter App.
+
+
+
+Date:	11/2/2019
+Time:	1.00pm
+
+1. Implement Firebase's Authentication and Cloud Firestore to the App by using Flutter framework.
+2. Still follow the MLKit tutorial (https://www.youtube.com/watch?v=vT6gNFE0GBw&t=222s).
+
+
+
 Date:	8/2/2019
 Time:	5.30pm
 
