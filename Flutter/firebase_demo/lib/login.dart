@@ -1,3 +1,4 @@
+import 'package:firebase_demo_3/main.dart';
 import 'package:flutter/material.dart';
 import 'auth.dart';
 
@@ -41,7 +42,7 @@ class LoginPageState extends State<LoginPage>
               image: new AssetImage("assets/image/background.png"),
               fit: BoxFit.cover,
               colorBlendMode: BlendMode.darken,
-              color: Colors.white70,
+              color: Colors.black26,
             ),
             new Theme(
                 data: new ThemeData(
@@ -85,12 +86,7 @@ class LoginButton extends StatelessWidget {
       stream: authService.user,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return MaterialButton(
-            onPressed: () => authService.signOut(),
-            color: Colors.red,
-            textColor: Colors.black,
-            child: Text('SignOut'),
-          );
+          return MyApp();
         } else {
           return Column(
             children: <Widget>[
