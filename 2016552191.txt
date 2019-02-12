@@ -1,3 +1,11 @@
+Date:	12/2/2019
+Time:	1.00pm
+
+1. Try another tutorial which latest example for MLKit App but it come with undifined error.
+2. Redo previous example which given by SV and try to solve the error of dependency version.
+
+
+
 Date:	11/2/2019
 Time:	5.30pm
 
