@@ -1,4 +1,12 @@
 Date:	12/2/2019
+Time:	5.30pm
+
+1. Try fix the version of Firebase Analysis dependency which it depend to the Google service dependency.
+2. Modified it without Firebase Analysis dependency and run it. Unfortunately, it has another error during build that app.
+
+
+
+Date:	12/2/2019
 Time:	1.00pm
 
 1. Try another tutorial which latest example for MLKit App but it come with undifined error.
