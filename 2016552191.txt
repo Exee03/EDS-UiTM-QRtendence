@@ -1,4 +1,12 @@
 Date:	13/2/2019
+Time:	5.30pm
+
+1. Start to build QRtendance App by add Login Google and Facebook setup in the App with Firebase Authentication.
+2. Make the App save all users data upload to the cloud into the Cloud Firestore.
+
+
+
+Date:	13/2/2019
 Time:	1.00pm
 
 1. The problem of MLKit dependency still occur and can't be solve, then got the instruction from SV to procedd make QR code App without using MLKit plugin.
