@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qrtendance/auth.dart';
 
 class HomePage extends StatelessWidget {
   static String tag = 'home-page';
@@ -33,6 +34,16 @@ class HomePage extends StatelessWidget {
       ),
     );
 
+    final signOut = Padding(
+      padding: EdgeInsets.all(8.0),
+      child: MaterialButton(
+        onPressed: () => authService.signOut(),
+        color: Colors.red,
+        textColor: Colors.black,
+        child: Text('SignOut'),
+      ),
+    );
+
     final body = Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(28.0),
@@ -43,7 +54,7 @@ class HomePage extends StatelessWidget {
         ]),
       ),
       child: Column(
-        children: <Widget>[alucard, welcome, lorem],
+        children: <Widget>[alucard, welcome, lorem, signOut],
       ),
     );
 
