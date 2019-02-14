@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:qrtendance/home_page.dart';
-import 'auth.dart';
+import 'auth_new.dart';
 
 class LoginPage extends StatefulWidget {
+  LoginPage({this.auth, this.onSignedIn});
+  final BaseAuth auth;
+  final VoidCallback onSignedIn;
+
   static String tag = 'login-page';
   @override
   _LoginPageState createState() => new _LoginPageState();
@@ -28,8 +32,8 @@ class _LoginPageState extends State<LoginPage>
     _iconAnimation.addListener(() => this.setState(() {}));
     _iconAnimationController.forward();
 
-    authService.profile.listen((state) => setState(() => _profile = state));
-    authService.loading.listen((state) => setState(() => _loading = state));
+    // authService.profile.listen((state) => setState(() => _profile = state));
+    // authService.loading.listen((state) => setState(() => _loading = state));
   }
 
   @override
@@ -39,7 +43,7 @@ class _LoginPageState extends State<LoginPage>
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 48.0,
-        child: Image.asset('assets/logo.png'),
+        child: Image.asset('assets/logo/logo.png'),
       ),
     );
 
@@ -49,13 +53,32 @@ class _LoginPageState extends State<LoginPage>
         autovalidate: true,
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[LoginButton()],
+          children: <Widget>[
+            MaterialButton(
+                onPressed: () async {
+                  String userId = await widget.auth.signInWithGoogle();
+                  print('Sign in: $userId');
+                },
+                color: Colors.white,
+                textColor: Colors.black,
+                child: Text('Login with Google'),
+              ),
+              MaterialButton(
+                onPressed: () async {
+                  String userId = await widget.auth.signInWithFacebook();
+                  print('Sign in: $userId');
+                },
+                color: Colors.white,
+                textColor: Colors.black,
+                child: Text('Login with Facebook'),
+              )
+          ],
         ),
       ),
     );
 
     final background = Image(
-      image: new AssetImage("assets/image/background.png"),
+      image: new AssetImage("assets/images/background.png"),
       fit: BoxFit.cover,
       colorBlendMode: BlendMode.darken,
       color: Colors.black26,
@@ -93,46 +116,46 @@ class _LoginPageState extends State<LoginPage>
   }
 }
 
-class LoginButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: authService.user,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamed(HomePage.tag);
-              },
-              padding: EdgeInsets.all(12),
-              color: Colors.lightBlueAccent,
-              child: Text('Log In', style: TextStyle(color: Colors.white)),
-            ),
-          );
-        } else {
-          return Column(
-            children: <Widget>[
-              MaterialButton(
-                onPressed: () => authService.googleSignIn(),
-                color: Colors.white,
-                textColor: Colors.black,
-                child: Text('Login with Google'),
-              ),
-              MaterialButton(
-                onPressed: () => authService.facebookLogin(),
-                color: Colors.white,
-                textColor: Colors.black,
-                child: Text('Login with Facebook'),
-              )
-            ],
-          );
-        }
-      },
-    );
-  }
-}
+// class LoginButton extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder(
+//       stream: authService.user,
+//       builder: (context, snapshot) {
+//         if (snapshot.hasData) {
+//           return Padding(
+//             padding: EdgeInsets.symmetric(vertical: 16.0),
+//             child: RaisedButton(
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.circular(24),
+//               ),
+//               onPressed: () {
+//                 Navigator.of(context).pushNamed(HomePage.tag);
+//               },
+//               padding: EdgeInsets.all(12),
+//               color: Colors.lightBlueAccent,
+//               child: Text('Log In', style: TextStyle(color: Colors.white)),
+//             ),
+//           );
+//         } else {
+//           return Column(
+//             children: <Widget>[
+//               MaterialButton(
+//                 onPressed: () => authService.googleSignIn(),
+//                 color: Colors.white,
+//                 textColor: Colors.black,
+//                 child: Text('Login with Google'),
+//               ),
+//               MaterialButton(
+//                 onPressed: () => authService.facebookLogin(),
+//                 color: Colors.white,
+//                 textColor: Colors.black,
+//                 child: Text('Login with Facebook'),
+//               )
+//             ],
+//           );
+//         }
+//       },
+//     );
+//   }
+// }
