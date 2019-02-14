@@ -1,4 +1,11 @@
 Date:	14/2/2019
+Time:	5.30pm
+
+1. Do some state management to the App and refactor it.
+
+
+
+Date:	14/2/2019
 Time:	1.00pm
 
 1. Try to design the interface of the App like login and home page.
