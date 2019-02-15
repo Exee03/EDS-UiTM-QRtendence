@@ -7,6 +7,7 @@ abstract class BaseAuth {
   Future<String> signInWithGoogle();
   Future<String> signInWithFacebook();
   Future<String> currentUser();
+  Future<void> signOut();
 }
 
 class Auth implements BaseAuth {
@@ -27,6 +28,18 @@ class Auth implements BaseAuth {
 
   Future<String> signInWithFacebook() async {
     final result = await _facebookLogin.logInWithReadPermissions(['email']);
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        print(result.accessToken.token);
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        print('Cancel by user');
+        break;
+      case FacebookLoginStatus.error:
+        print('Error status :');
+        print(result.errorMessage);
+        break;
+    }
     FirebaseUser user = await _firebaseAuth.signInWithFacebook(
       accessToken: result.accessToken.token,
     );
@@ -36,5 +49,9 @@ class Auth implements BaseAuth {
   Future<String> currentUser() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user.uid;
+  }
+
+  Future<void> signOut() async {
+    return _firebaseAuth.signOut();
   }
 }

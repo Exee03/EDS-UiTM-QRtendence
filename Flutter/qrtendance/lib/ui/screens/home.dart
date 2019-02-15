@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/auth.dart';
+import 'package:qrtendance/utils/auth.dart';
+import 'package:qrtendance/utils/auth_provider.dart';
 
-class HomePage extends StatelessWidget {
-  static String tag = 'home-page';
+
+class HomePage extends StatefulWidget {
+  HomePage({this.onSignedOut});
+  final VoidCallback onSignedOut;
+
+  @override
+  HomePageState createState() {
+    return new HomePageState();
+  }
+}
+
+class HomePageState extends State<HomePage> {
+
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      final BaseAuth auth = AuthProvider.of(context).auth;
+      await auth.signOut();
+      widget.onSignedOut();
+      print('SignOut!!!');
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +56,10 @@ class HomePage extends StatelessWidget {
       ),
     );
 
-    final signOut = Padding(
+    final buttonSignOut = Padding(
       padding: EdgeInsets.all(8.0),
       child: MaterialButton(
-        onPressed: () => authService.signOut(),
+        onPressed: () => _signOut(context),
         color: Colors.red,
         textColor: Colors.black,
         child: Text('SignOut'),
@@ -54,7 +76,7 @@ class HomePage extends StatelessWidget {
         ]),
       ),
       child: Column(
-        children: <Widget>[alucard, welcome, lorem, signOut],
+        children: <Widget>[alucard, welcome, lorem, buttonSignOut],
       ),
     );
 
