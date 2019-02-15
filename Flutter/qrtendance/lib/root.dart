@@ -16,7 +16,7 @@ enum AuthStatus {
 }
 
 class _RootPageState extends State<RootPage> {
-  AuthStatus authStatus = AuthStatus.notDetermined;
+  AuthStatus authStatus = AuthStatus.notSignedIn;
 
   @override
   void didChangeDependencies() {
@@ -24,8 +24,7 @@ class _RootPageState extends State<RootPage> {
     final BaseAuth auth = AuthProvider.of(context).auth;
     auth.currentUser().then((String userId) {
       setState(() {
-        authStatus =
-            userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+        authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
       });
     });
   }
@@ -48,11 +47,11 @@ class _RootPageState extends State<RootPage> {
       case AuthStatus.notDetermined:
         return _buildWaitingScreen();
       case AuthStatus.notSignedIn:
-        return new LoginPage(
+        return LoginPage(
           onSignedIn: _signedIn,
         );
       case AuthStatus.signedIn:
-        return new HomePage(
+        return HomePage(
           onSignedOut: _signedOut,
         );
     }
