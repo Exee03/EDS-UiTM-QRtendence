@@ -1,3 +1,25 @@
+Date:	18/2/2019
+Time:	1.00pm
+
+1. Able to combine the page with the bottom tab navigation on the App.
+
+
+
+Date:	15/2/2019
+Time:	5.30pm
+
+1. Done to implement the bottom tab on the App.
+2. Learn to combine the page with the bottom tab on the App.
+
+
+
+Date:	15/2/2019
+Time:	12.30pm
+
+1. Learn to add bottom tab bar on the App.
+
+
+
 Date:	14/2/2019
 Time:	5.30pm
 
