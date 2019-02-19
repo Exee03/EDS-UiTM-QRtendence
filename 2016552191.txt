@@ -1,3 +1,11 @@
+Date:	19/2/2019
+Time:	1.00pm
+
+1. Design the User Interface to the App by adding vertical and horizontal list in the same page.
+2. Find the solution where the App can't read multiple database in Cloud Firestore.
+
+
+
 Date:	18/2/2019
 Time:	5.30pm
 
