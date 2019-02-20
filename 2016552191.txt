@@ -1,3 +1,18 @@
+Date:	21/2/2019
+Time:	5.30pm
+
+1. Convert the snapshot from Cloud Firestore to the custom module which can make more structure.
+2. Find solution for conversion of snapshot and finally done convert it into the module.
+
+
+
+Date:	21/2/2019
+Time:	1.00pm
+
+1. Combine the Sliver widget with horizontal list and vertical list in same page for more productive to the users.
+
+
+
 Date:	20/2/2019
 Time:	5.30pm
 
