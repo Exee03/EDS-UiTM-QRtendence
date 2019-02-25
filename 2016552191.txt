@@ -1,4 +1,12 @@
 Date:	25/2/2019
+Time:	5.30pm
+
+1. Add another text form field to add Course Code into the database in Cloud Firestore.
+2. There are some error where the data has been add however in the console Cloud Firestore does not have that data and try to solve that problem.
+
+
+
+Date:	25/2/2019
 Time:	1.00pm
 
 1. Do some data structure for database of Cloud Firestore to make more organize and efficient during read or write the database.
