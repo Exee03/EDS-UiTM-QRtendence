@@ -1,3 +1,11 @@
+Date:	25/2/2019
+Time:	1.00pm
+
+1. Do some data structure for database of Cloud Firestore to make more organize and efficient during read or write the database.
+2. Do uploading the user input from the form field into Cloud Firestore.
+
+
+
 Date:	22/2/2019
 Time:	5.30pm
 
