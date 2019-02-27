@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/utils/auth.dart';
+import 'package:qrtendance/utils/firebase_provider.dart';
 import 'package:qrtendance/utils/auth_provider.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.onSignedIn});
+  LoginPage({this.onSignedIn, this.userId});
   final VoidCallback onSignedIn;
+  String userId;
 
   @override
   _LoginPageState createState() => new _LoginPageState();
@@ -20,18 +21,24 @@ class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
+  bool _visible= false;
 
   SignInMethod _signInMethod = SignInMethod.non;
 
   @override
   void initState() {
     super.initState();
+    _visible = false;
     _iconAnimationController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 2000));
+      vsync: this,
+      duration: new Duration(milliseconds: 1000),
+    );
     _iconAnimation =
         Tween(begin: 0.0, end: 100.0).animate(_iconAnimationController)
           ..addListener(() {
-            setState(() {});
+            setState(() {
+              _visible = !_visible;
+            });
           });
     _iconAnimationController.forward();
   }
@@ -40,16 +47,12 @@ class _LoginPageState extends State<LoginPage>
     try {
       final BaseAuth auth = AuthProvider.of(context).auth;
       if (_signInMethod == SignInMethod.withGoogle) {
-        String userId = await auth.signInWithGoogle();
-        print(userId);
-        // Dialogs dialogs = new Dialogs();
-        // dialogs.information(context, 'Google', userId);
+        widget.userId = await auth.signInWithGoogle();
+        print('LoginPage = ${widget.userId}');
         widget.onSignedIn();
       } else if (_signInMethod == SignInMethod.withFacebook) {
-        String userId = await auth.signInWithFacebook();
-        print(userId);
-        // Dialogs dialogs = new Dialogs();
-        // dialogs.information(context, 'Facebook', userId);
+        widget.userId = await auth.signInWithFacebook();
+        print('LoginPage = ${widget.userId}');
         widget.onSignedIn();
       } else {
         print("Please select");
@@ -78,7 +81,10 @@ class _LoginPageState extends State<LoginPage>
     final logo = Container(
       height: _iconAnimation.value * 2.0,
       width: _iconAnimation.value * 2.0,
-      child: Image.asset('assets/logo/logo.png'),
+      child: new Hero(
+        tag: 'logo',
+        child: Image.asset('assets/logo/logo.png'),
+      ),
     );
 
     final loginButton = new Container(
@@ -86,25 +92,60 @@ class _LoginPageState extends State<LoginPage>
       child: new Form(
         autovalidate: true,
         child: new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            RaisedButton(
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
-              onPressed: loginGoogle,
-              color: Colors.white,
-              textColor: Colors.black,
-              child: Text('Login with Google'),
+            AnimatedOpacity(
+              // If the Widget should be visible, animate to 1.0 (fully visible).
+              // If the Widget should be hidden, animate to 0.0 (invisible).
+              opacity: _visible ? 0.0 : 1.0,
+              duration: Duration(milliseconds: 500),
+              // The green box needs to be the child of the AnimatedOpacity
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  RaisedButton(
+                    elevation: 2.0,
+                    splashColor: Colors.green,
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                    onPressed: loginGoogle,
+                    color: Colors.white,
+                    textColor: Colors.black,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/logo/google.png',
+                          height: 28.0,
+                          width: 28.0,
+                        ),
+                        Text('Login with Google'),
+                      ],
+                    ),
+                  ),
+                  RaisedButton(
+                    elevation: 2.0,
+                    splashColor: Colors.blue,
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0)),
+                    onPressed: loginFacebook,
+                    color: Colors.white,
+                    textColor: Colors.black,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/logo/facebook.png',
+                          height: 40.0,
+                          width: 40.0,
+                        ),
+                        Text('Login with Facebook'),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-            RaisedButton(
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
-              onPressed: loginFacebook,
-              color: Colors.white,
-              textColor: Colors.black,
-              child: Text('Login with Facebook'),
-            )
           ],
         ),
       ),
@@ -140,27 +181,3 @@ class _LoginPageState extends State<LoginPage>
         ));
   }
 }
-
-// class Dialogs {
-//   information(BuildContext context, String title, String description) {
-//     return showDialog(
-//         context: context,
-//         barrierDismissible: true,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             title: Text(title),
-//             content: SingleChildScrollView(
-//               child: ListBody(
-//                 children: <Widget>[Text(description)],
-//               ),
-//             ),
-//             actions: <Widget>[
-//               FlatButton(
-//                 onPressed: () => Navigator.pop(context),
-//                 child: Text('Ok'),
-//               )
-//             ],
-//           );
-//         });
-//   }
-// }

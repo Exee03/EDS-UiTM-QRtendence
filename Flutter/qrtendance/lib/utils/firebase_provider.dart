@@ -9,6 +9,7 @@ abstract class BaseAuth {
   Future<String> signInWithFacebook();
   Future<String> currentUser();
   Future<void> signOut();
+  Future getDoc(String col);
 }
 
 class Auth implements BaseAuth {
@@ -61,8 +62,9 @@ class Auth implements BaseAuth {
   void updateUserData(FirebaseUser user) async {
     DocumentReference ref = _db.collection('users').document(user.uid);
     if (user.providerData[1].providerId == "facebook.com") {
-      var bigImgUrl =
-          "https://graph.facebook.com/" + user.providerData[1].uid + "/picture?height=500";
+      var bigImgUrl = "https://graph.facebook.com/" +
+          user.providerData[1].uid +
+          "/picture?height=500";
       ref.setData({'photoURL': bigImgUrl});
     } else if (user.providerData[1].providerId == "google.com") {
       ref.setData({'photoURL': user.photoUrl});
@@ -74,5 +76,10 @@ class Auth implements BaseAuth {
       'displayName': user.displayName,
       'lastSeen': DateTime.now()
     }, merge: true);
+  }
+
+  Future getDoc(String col) async {
+    QuerySnapshot qn = await _db.collection(col).getDocuments();
+    return qn.documents;
   }
 }

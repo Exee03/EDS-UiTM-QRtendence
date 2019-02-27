@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/utils/auth.dart';
+import 'package:qrtendance/utils/firebase_provider.dart';
 
 class AuthProvider extends InheritedWidget {
   const AuthProvider({Key key, Widget child, this.auth}) : super(key: key, child: child);

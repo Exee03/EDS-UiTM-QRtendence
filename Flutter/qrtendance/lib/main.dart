@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/utils/auth.dart';
+import 'package:qrtendance/utils/firebase_provider.dart';
 import 'package:qrtendance/utils/auth_provider.dart';
 import 'package:qrtendance/root.dart';
 

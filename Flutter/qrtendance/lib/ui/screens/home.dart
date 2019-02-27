@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/utils/auth.dart';
-import 'package:qrtendance/utils/auth_provider.dart';
-
+import 'package:qrtendance/ui/widgets/class_list.dart';
+import 'package:qrtendance/ui/screens/tabs/home_tab.dart';
+import 'package:qrtendance/ui/screens/tabs/profile_tab.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({this.onSignedOut});
+  HomePage({this.onSignedOut, this.userId});
+  String userId;
   final VoidCallback onSignedOut;
 
   @override
@@ -14,74 +15,55 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  int currentTab = 0;
 
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      final BaseAuth auth = AuthProvider.of(context).auth;
-      await auth.signOut();
-      widget.onSignedOut();
-      print('SignOut!!!');
-    } catch (e) {
-      print(e);
-    }
+  HomeTab one;
+  ClassList two;
+  ProfileTab three;
+  List<Widget> pages;
+  Widget currentPage;
+
+  get onSignedOut => widget.onSignedOut;
+
+  @override
+  void initState() {
+    one = HomeTab(userId: widget.userId);
+    two = ClassList();
+    three = ProfileTab(onSignedOut,userId: widget.userId);
+
+    pages = [one, two, three];
+
+    currentPage = one;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final alucard = Hero(
-      tag: 'hero',
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: CircleAvatar(
-          radius: 72.0,
-          backgroundColor: Colors.transparent,
-          backgroundImage: AssetImage('assets/images/avatar.jpg'),
-        ),
-      ),
-    );
-
-    final welcome = Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(
-        'Welcome Alucard',
-        style: TextStyle(fontSize: 28.0, color: Colors.white),
-      ),
-    );
-
-    final lorem = Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit condimentum mauris id tempor. Praesent eu commodo lacus. Praesent eget mi sed libero eleifend tempor. Sed at fringilla ipsum. Duis malesuada feugiat urna vitae convallis. Aliquam eu libero arcu.',
-        style: TextStyle(fontSize: 16.0, color: Colors.white),
-      ),
-    );
-
-    final buttonSignOut = Padding(
-      padding: EdgeInsets.all(8.0),
-      child: MaterialButton(
-        onPressed: () => _signOut(context),
-        color: Colors.red,
-        textColor: Colors.black,
-        child: Text('SignOut'),
-      ),
-    );
-
-    final body = Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.all(28.0),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          Colors.blue,
-          Colors.lightBlueAccent,
-        ]),
-      ),
-      child: Column(
-        children: <Widget>[alucard, welcome, lorem, buttonSignOut],
-      ),
-    );
-
     return Scaffold(
-      body: body,
+      body: currentPage,
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentTab,
+        onTap: (int index) {
+          setState(() {
+            currentTab = index;
+            currentPage = pages[index];
+          });
+        },
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_a_photo),
+            title: Text('Photo'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            title: Text('Settings'),
+          )
+        ],
+      ),
     );
   }
 }

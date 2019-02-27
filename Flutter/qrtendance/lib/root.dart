@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/utils/auth.dart';
+import 'package:qrtendance/utils/firebase_provider.dart';
 import 'package:qrtendance/utils/auth_provider.dart';
 import 'package:qrtendance/ui/screens/login.dart';
 import 'package:qrtendance/ui/screens/home.dart';
@@ -18,11 +18,14 @@ enum AuthStatus {
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.notSignedIn;
 
+  String userID;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final BaseAuth auth = AuthProvider.of(context).auth;
     auth.currentUser().then((String userId) {
+      userID = userId;
       setState(() {
         authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
       });
@@ -35,11 +38,11 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  void _signedOut() {
-    setState(() {
-      authStatus = AuthStatus.notSignedIn;
-    });
-  }
+    void _signedOut() {
+      setState(() {
+        authStatus = AuthStatus.notSignedIn;
+      });
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +52,12 @@ class _RootPageState extends State<RootPage> {
       case AuthStatus.notSignedIn:
         return LoginPage(
           onSignedIn: _signedIn,
+          userId: userID,
         );
       case AuthStatus.signedIn:
         return HomePage(
           onSignedOut: _signedOut,
+          userId: userID,
         );
     }
     return null;
