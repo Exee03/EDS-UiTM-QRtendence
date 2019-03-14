@@ -1,9 +1,11 @@
+import 'package:QRtendance/root.dart';
+import 'package:QRtendance/utils/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:qrtendance/utils/firebase_provider.dart';
-import 'package:qrtendance/utils/auth_provider.dart';
+import 'package:QRtendance/utils/firebase_provider.dart';
+import 'package:QRtendance/utils/auth_provider.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.onSignedIn, this.userId});
+  LoginPage(this.onSignedIn, this.userId);
   final VoidCallback onSignedIn;
   String userId;
 
@@ -21,14 +23,16 @@ class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
-  bool _visible= false;
+  bool _visible = false;
+  var _opacity = 0.0;
 
   SignInMethod _signInMethod = SignInMethod.non;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _visible = false;
+
     _iconAnimationController = new AnimationController(
       vsync: this,
       duration: new Duration(milliseconds: 1000),
@@ -41,6 +45,14 @@ class _LoginPageState extends State<LoginPage>
             });
           });
     _iconAnimationController.forward();
+    setState(() {
+      _opacity = _opacity == 0.0 ? 1.0 : 0.0;
+    });
+  }
+
+  void showInSnackBar(String value) {
+    _scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text(value, style: smallTextStyle,)));
   }
 
   void validateAndSubmit() async {
@@ -48,16 +60,28 @@ class _LoginPageState extends State<LoginPage>
       final BaseAuth auth = AuthProvider.of(context).auth;
       if (_signInMethod == SignInMethod.withGoogle) {
         widget.userId = await auth.signInWithGoogle();
+        showInSnackBar('Welcome');
         print('LoginPage = ${widget.userId}');
         widget.onSignedIn();
+        Navigator.pushReplacement(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => new RootPage()));
       } else if (_signInMethod == SignInMethod.withFacebook) {
         widget.userId = await auth.signInWithFacebook();
+        showInSnackBar('Welcome');
         print('LoginPage = ${widget.userId}');
         widget.onSignedIn();
+        Navigator.pushReplacement(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => new RootPage()));
       } else {
+        showInSnackBar("Please Select");
         print("Please select");
       }
     } catch (e) {
+      showInSnackBar(e);
       print("Error=====> $e");
     }
   }
@@ -83,7 +107,11 @@ class _LoginPageState extends State<LoginPage>
       width: _iconAnimation.value * 2.0,
       child: new Hero(
         tag: 'logo',
-        child: Image.asset('assets/logo/logo.png'),
+        child: CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 50.0,
+          backgroundImage: AssetImage('assets/logo/logo.png'),
+        ),
       ),
     );
 
@@ -96,7 +124,7 @@ class _LoginPageState extends State<LoginPage>
             AnimatedOpacity(
               // If the Widget should be visible, animate to 1.0 (fully visible).
               // If the Widget should be hidden, animate to 0.0 (invisible).
-              opacity: _visible ? 0.0 : 1.0,
+              opacity: _opacity,
               duration: Duration(milliseconds: 500),
               // The green box needs to be the child of the AnimatedOpacity
               child: Column(
@@ -116,10 +144,10 @@ class _LoginPageState extends State<LoginPage>
                       children: <Widget>[
                         Image.asset(
                           'assets/logo/google.png',
-                          height: 28.0,
+                          height: 40.0,
                           width: 28.0,
                         ),
-                        Text('Login with Google'),
+                        Text('Login via Google',style: smallTextStyle),
                       ],
                     ),
                   ),
@@ -139,7 +167,7 @@ class _LoginPageState extends State<LoginPage>
                           height: 40.0,
                           width: 40.0,
                         ),
-                        Text('Login with Facebook'),
+                        Text('Login via Facebook',style: smallTextStyle,),
                       ],
                     ),
                   )
@@ -152,6 +180,7 @@ class _LoginPageState extends State<LoginPage>
     );
 
     return new Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.white,
         body: new Stack(
           fit: StackFit.expand,

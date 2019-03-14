@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:qrtendance/model/classes_model.dart';
-import 'package:qrtendance/ui/widgets/add_semester.dart';
-import 'package:qrtendance/ui/widgets/classes_card.dart';
-import 'package:qrtendance/ui/widgets/classes_widget.dart';
-import 'package:qrtendance/ui/widgets/semester_card.dart';
+import 'package:QRtendance/model/classes_model.dart';
+import 'package:QRtendance/ui/screens/pages/adding/add_semester.dart';
+import 'package:QRtendance/ui/widgets/card/class_card_recently.dart';
+import 'package:QRtendance/ui/widgets/card/semester_card.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:qrtendance/utils/hero_dialog_route.dart';
+import 'package:QRtendance/utils/dialog_page_route.dart';
+import 'package:QRtendance/utils/theme.dart';
 
 class HomeTab extends StatefulWidget {
   HomeTab({this.userId});
@@ -18,27 +18,117 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   @override
+  void initState() {
+    super.initState();
+    print(widget.userId);
+    checkData();
+  }
+
+  checkData() async {
+    await Firestore.instance
+        .collection('semester')
+        .where('userId', isEqualTo: widget.userId)
+        .getDocuments()
+        .then((onValue) {
+      if (onValue.documents.isEmpty) {
+        Navigator.push(
+            context,
+            HeroDialogRoute(
+                builder: (BuildContext context) =>
+                    AddSemester(userId: widget.userId)));
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        _header(),
-        _subtitle1(),
-        _horizontalList(),
-        _subtitle2(),
-        _verticalList()
+    return Stack(
+      children: <Widget>[
+        Hero(
+          tag: 'semesterWidget',
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 230.0),
+            child: Container(
+              // height: screenSize.height - 20,
+              decoration: ShapeDecoration(
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.only(
+                  bottomRight: Radius.elliptical(300.0, 100.0),
+                  bottomLeft: Radius.elliptical(300.0, 100.0),
+                  // bottomLeft: Radius.circular(50.0)
+                )),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+          ),
+        ),
+        CustomScrollView(
+          slivers: <Widget>[
+            _header(),
+            _subtitle1(),
+            _horizontalList(),
+            _subtitle2(),
+            _verticalList()
+          ],
+        ),
       ],
     );
   }
 
   SliverAppBar _header() {
     return SliverAppBar(
-      pinned: true,
       expandedHeight: 200.0,
+      backgroundColor: Colors.transparent,
       flexibleSpace: FlexibleSpaceBar(
-        title: Text("QRtendence"),
-        background: Image.asset(
-          'assets/images/background.png',
-          fit: BoxFit.cover,
+        centerTitle: true,
+        title: Hero(
+          tag: 'appTitle',
+          child: Material(
+            color: Colors.transparent,
+            child: Text(
+              "QRtendance",
+              style: appTitle,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _subtitle1() {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Text(
+                'Semester',
+                style: appHeader1,
+              ),
+            ),
+            Expanded(
+              child: Hero(
+                tag: 'addSemester',
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    color: Colors.purple,
+                    icon: Icon(Icons.add),
+                    onPressed: () => Navigator.push(
+                        context,
+                        HeroDialogRoute(
+                            builder: (BuildContext context) =>
+                                AddSemester(userId: widget.userId))),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -62,7 +152,7 @@ class _HomeTabState extends State<HomeTab> {
           );
         return SliverToBoxAdapter(
           child: Container(
-            height: 200.0,
+            height: 180.0,
             child: Swiper(
               scrollDirection: Axis.horizontal,
               itemCount: snapshot.data.documents.length,
@@ -80,67 +170,13 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  SliverToBoxAdapter _subtitle1() {
-    return SliverToBoxAdapter(
-      child: Row(
-        children: <Widget>[
-          Text(
-            'Semester',
-            style: TextStyle(
-              fontSize: 30.0,
-            ),
-          ),
-          Expanded(
-            child: Hero(
-              tag: 'addSemester',
-              child: Container(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  color: Colors.purple,
-                  icon: Icon(Icons.add),
-                  onPressed: () => Navigator.push(
-                      context,
-                      HeroDialogRoute(
-                          builder: (BuildContext context) =>
-                              AddSemester(userId: widget.userId))),
-                  // Navigator.of(context).push(
-                  //       PageRouteBuilder<Null>(
-                  //         pageBuilder: (
-                  //           BuildContext context,
-                  //           Animation<double> animation,
-                  //           Animation<double> secondaryAnimation,
-                  //         ) {
-                  //           return AnimatedBuilder(
-                  //             animation: animation,
-                  //             builder: (
-                  //               BuildContext context,
-                  //               Widget child,
-                  //             ) {
-                  //               return Opacity(
-                  //                 opacity: animation.value,
-                  //                 child: AddSemester(userId: widget.userId),
-                  //               );
-                  //             },
-                  //           );
-                  //         },
-                  //         transitionDuration: Duration(milliseconds: 600),
-                  //       ),
-                  //     ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   SliverToBoxAdapter _subtitle2() {
     return SliverToBoxAdapter(
-      child: Text(
-        'Recently',
-        style: TextStyle(
-          fontSize: 30.0,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: Text(
+          'Recently',
+          style: appHeader2,
         ),
       ),
     );
@@ -148,7 +184,10 @@ class _HomeTabState extends State<HomeTab> {
 
   StreamBuilder _verticalList() {
     return StreamBuilder(
-      stream: Firestore.instance.collection("admin").snapshots(),
+      stream: Firestore.instance
+          .collection("groupClass")
+          .where('userId', isEqualTo: widget.userId)
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (!snapshot.hasData) {
           return SliverFillRemaining(
@@ -163,40 +202,13 @@ class _HomeTabState extends State<HomeTab> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 DocumentSnapshot ds = snapshot.data.documents[index];
-                return InkWell(
-                  onTap: () => Navigator.of(context).push(
-                        PageRouteBuilder<Null>(
-                          pageBuilder: (
-                            BuildContext context,
-                            Animation<double> animation,
-                            Animation<double> secondaryAnimation,
-                          ) {
-                            return AnimatedBuilder(
-                              animation: animation,
-                              builder: (
-                                BuildContext context,
-                                Widget child,
-                              ) {
-                                return Opacity(
-                                  opacity: animation.value,
-                                  child: ClassesWidget(
-                                    context,
-                                    Classes.fromMap(ds, index),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          transitionDuration: Duration(milliseconds: 600),
-                        ),
-                      ),
-                  child: Hero(
-                    tag: 'classesCard$index',
-                    child: Container(
-                      child: ClassesCard(
-                        context,
-                        Classes.fromMap(ds, index),
-                      ),
+                return Hero(
+                  tag: 'classesCard$index',
+                  child: Container(
+                    child: ClassCardRecently(
+                      context,
+                      Classes.fromMap(ds, index),
+                      widget.userId,
                     ),
                   ),
                 );

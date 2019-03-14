@@ -9,7 +9,6 @@ abstract class BaseAuth {
   Future<String> signInWithFacebook();
   Future<String> currentUser();
   Future<void> signOut();
-  Future getDoc(String col);
 }
 
 class Auth implements BaseAuth {
@@ -76,10 +75,5 @@ class Auth implements BaseAuth {
       'displayName': user.displayName,
       'lastSeen': DateTime.now()
     }, merge: true);
-  }
-
-  Future getDoc(String col) async {
-    QuerySnapshot qn = await _db.collection(col).getDocuments();
-    return qn.documents;
   }
 }

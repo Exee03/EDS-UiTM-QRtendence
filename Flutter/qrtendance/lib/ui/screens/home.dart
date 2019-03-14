@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/ui/widgets/class_list.dart';
-import 'package:qrtendance/ui/screens/tabs/home_tab.dart';
-import 'package:qrtendance/ui/screens/tabs/profile_tab.dart';
+import 'package:QRtendance/ui/screens/tabs/home_tab.dart';
+import 'package:QRtendance/ui/screens/tabs/summary_tab.dart';
+import 'package:QRtendance/ui/screens/tabs/profile_tab.dart';
+import 'package:QRtendance/utils/theme.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({this.onSignedOut, this.userId});
-  String userId;
+  final String userId;
   final VoidCallback onSignedOut;
 
   @override
@@ -18,7 +19,7 @@ class HomePageState extends State<HomePage> {
   int currentTab = 0;
 
   HomeTab one;
-  ClassList two;
+  SummaryTab two;
   ProfileTab three;
   List<Widget> pages;
   Widget currentPage;
@@ -28,8 +29,8 @@ class HomePageState extends State<HomePage> {
   @override
   void initState() {
     one = HomeTab(userId: widget.userId);
-    two = ClassList();
-    three = ProfileTab(onSignedOut,userId: widget.userId);
+    two = SummaryTab(userId: widget.userId);
+    three = ProfileTab(onSignedOut: onSignedOut, userId: widget.userId);
 
     pages = [one, two, three];
 
@@ -52,15 +53,24 @@ class HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text(
+              'Home',
+              style: smallTextStyle,
+            ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_a_photo),
-            title: Text('Photo'),
+            icon: Icon(Icons.assessment),
+            title: Text(
+              'Summary',
+              style: smallTextStyle,
+            ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            title: Text('Settings'),
+            icon: Icon(Icons.person),
+            title: Text(
+              'Profile',
+              style: smallTextStyle,
+            ),
           )
         ],
       ),

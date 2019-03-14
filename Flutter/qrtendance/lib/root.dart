@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/utils/firebase_provider.dart';
-import 'package:qrtendance/utils/auth_provider.dart';
-import 'package:qrtendance/ui/screens/login.dart';
-import 'package:qrtendance/ui/screens/home.dart';
+import 'package:QRtendance/utils/firebase_provider.dart';
+import 'package:QRtendance/utils/auth_provider.dart';
+import 'package:QRtendance/ui/screens/login.dart';
+import 'package:QRtendance/ui/screens/home.dart';
 
 class RootPage extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ enum AuthStatus {
 }
 
 class _RootPageState extends State<RootPage> {
-  AuthStatus authStatus = AuthStatus.notSignedIn;
+  AuthStatus authStatus = AuthStatus.notDetermined;
 
   String userID;
 
@@ -27,7 +27,8 @@ class _RootPageState extends State<RootPage> {
     auth.currentUser().then((String userId) {
       userID = userId;
       setState(() {
-        authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+        authStatus =
+            userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
       });
     });
   }
@@ -38,27 +39,31 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-    void _signedOut() {
-      setState(() {
-        authStatus = AuthStatus.notSignedIn;
-      });
-    }
+  void _signedOut() {
+    setState(() {
+      authStatus = AuthStatus.notSignedIn;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(
+        '..................................before.........................................\n$userID');
+    if (userID == 'D6K543ZoO5RIQLKGsg9fqnNTN8j2' || userID == null) {
+      _signedOut();
+    }
+    print(
+        '....................................after.......................................\n$userID');
     switch (authStatus) {
       case AuthStatus.notDetermined:
         return _buildWaitingScreen();
       case AuthStatus.notSignedIn:
         return LoginPage(
-          onSignedIn: _signedIn,
-          userId: userID,
+          _signedIn,
+          userID,
         );
       case AuthStatus.signedIn:
-        return HomePage(
-          onSignedOut: _signedOut,
-          userId: userID,
-        );
+        return HomePage(onSignedOut: _signedOut, userId: userID);
     }
     return null;
   }
@@ -67,7 +72,7 @@ class _RootPageState extends State<RootPage> {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        child: CircularProgressIndicator(),
+        child: Text('undetermine'),
       ),
     );
   }

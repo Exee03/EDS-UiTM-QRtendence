@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qrtendance/utils/firebase_provider.dart';
-import 'package:qrtendance/utils/auth_provider.dart';
-import 'package:qrtendance/root.dart';
+import 'package:QRtendance/ui/screens/splash_screen.dart';
+import 'package:QRtendance/utils/firebase_provider.dart';
+import 'package:QRtendance/utils/auth_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
     return AuthProvider(
       auth: Auth(),
       child: MaterialApp(
-        title: 'Flutter login demo',
+        title: 'QRtendance',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.amber,
         ),
-        home: RootPage(),
+        home: SplashScreen(),
       ),
     );
   }
