@@ -20,7 +20,7 @@ class CoursePage extends StatelessWidget {
           body: Stack(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 100.0),
+                padding: const EdgeInsets.only(top: 150.0),
                 child: StreamBuilder(
                   stream: Firestore.instance
                       .collection('groupClass')
