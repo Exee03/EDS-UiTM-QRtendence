@@ -29,7 +29,7 @@ dependencies:
   after_layout: ^1.0.7
   flutter_masked_text: ^0.7.0
   date_format: ^1.0.6
-  flutter_swiper : ^1.1.4
+  flutter_swiper: ^1.1.4
   numberpicker: ^1.0.0
   random_color: ^1.0.3
   barcode_scan: 0.0.8
